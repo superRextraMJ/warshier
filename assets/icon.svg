@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Kasir Warung">
+  <rect width="512" height="512" fill="#1d563a"/>
+  <rect x="40" y="40" width="432" height="432" rx="92" fill="none" stroke="#f4f0e6" stroke-width="10" opacity="0.42"/>
+  <path d="M139 280h234a117 117 0 0 1-234 0Z" fill="#fffdf8"/>
+  <path d="M150 307h212" fill="none" stroke="#1d563a" stroke-width="10" stroke-linecap="round" opacity="0.22"/>
+  <path d="M179 385h154" fill="none" stroke="#fffdf8" stroke-width="22" stroke-linecap="round"/>
+  <path d="M222 229c0-19 16-25 16-45M256 229c0-19 16-25 16-45M290 229c0-19 16-25 16-45" fill="none" stroke="#fffdf8" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="0" fill="none"/>
+</svg>
