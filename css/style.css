@@ -1390,7 +1390,8 @@ fieldset:disabled {
   background: var(--surface-alt);
 }
 
-.filter-chip[aria-pressed="true"] {
+.filter-chip[aria-pressed="true"],
+.filter-chip[aria-current="true"] {
   border-color: var(--primary);
   background: var(--primary);
   color: var(--on-primary);
@@ -1398,6 +1399,10 @@ fieldset:disabled {
 
 .menu-catalog {
   min-height: 220px;
+}
+
+.menu-group {
+  scroll-margin-top: 16px;
 }
 
 .menu-group + .menu-group {
@@ -1417,6 +1422,7 @@ fieldset:disabled {
 .menu-group-heading h2 {
   margin: 0;
   font-size: 1.35rem;
+  scroll-margin-top: 16px;
 }
 
 .menu-group-count {

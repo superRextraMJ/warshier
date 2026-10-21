@@ -6,7 +6,7 @@ Dibuat untuk dipakai satu orang pemilik/kasir di tablet atau ponsel, dengan tomb
 
 ## Fitur
 
-- **Ambil pesanan** — kartu menu besar per kategori, pencarian, pilihan add-on, tombol tambah/kurang jumlah, catatan pesanan, dan ringkasan total yang selalu terlihat.
+- **Ambil pesanan** — kartu menu besar per kategori, pencarian, tombol kategori yang langsung menggulir ke bagiannya, pilihan add-on, tombol tambah/kurang jumlah, catatan pesanan, dan ringkasan total yang selalu terlihat.
 - **Pembayaran** — daftar pesanan lengkap, total sangat besar, pilihan **TUNAI** atau **QRIS**, serta diskon pelajar dan ojol.
   - Tunai: input uang diterima, kembalian otomatis, tombol cepat Rp 10.000 / 20.000 / 50.000 / 100.000 / uang pas.
   - QRIS: menampilkan gambar QRIS yang diunggah dari Pengaturan. Kasir menekan “Pembayaran diterima” setelah uang benar-benar masuk.

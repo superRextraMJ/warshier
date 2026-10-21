@@ -1518,7 +1518,6 @@
     state.categories.forEach(function (category) {
       const items = state.menu.filter(function (item) {
         if (item.categoryId !== category.id) return false;
-        if (ui.category !== 'all' && item.categoryId !== ui.category) return false;
         if (!query) return true;
         return normalizeSearch(item.name).includes(query);
       });
@@ -1542,18 +1541,58 @@
     const categories = availableCategories();
     let html =
       '<div class="filter-row" role="group" aria-label="' + escapeHTML(t('order.categoryLabel')) + '">' +
-      '<button type="button" class="filter-chip" data-action="filter-category" data-category="all" aria-pressed="' +
-      (ui.category === 'all' ? 'true' : 'false') + '">' + escapeHTML(t('order.allCategories')) + '</button>';
+      '<button type="button" class="filter-chip" data-action="jump-category" data-category="all"' +
+      (ui.category === 'all' ? ' aria-current="true"' : '') + '>' +
+      escapeHTML(t('order.allCategories')) + '</button>';
     categories.forEach(function (category) {
       html +=
-        '<button type="button" class="filter-chip" data-action="filter-category" data-category="' +
-        escapeHTML(category.id) + '" aria-pressed="' +
-        (ui.category === category.id ? 'true' : 'false') + '">' +
+        '<button type="button" class="filter-chip" data-action="jump-category" data-category="' +
+        escapeHTML(category.id) + '"' +
+        (ui.category === category.id ? ' aria-current="true"' : '') + '>' +
         escapeHTML(categoryLabel(category)) +
         '</button>';
     });
     html += '</div>';
     return html;
+  }
+
+  function clearMenuSearch() {
+    if (!ui.search) return false;
+    ui.search = '';
+    const input = $('#menu-search');
+    if (input) input.value = '';
+    const clearButton = $('.search-clear');
+    if (clearButton) clearButton.hidden = true;
+    return true;
+  }
+
+  function setActiveCategoryChip(categoryId) {
+    $$('.filter-chip').forEach(function (chip) {
+      if (chip.dataset.category === categoryId) chip.setAttribute('aria-current', 'true');
+      else chip.removeAttribute('aria-current');
+    });
+  }
+
+  function jumpToMenuCategory(categoryId) {
+    const targetCategory = categoryId || 'all';
+    ui.category = targetCategory;
+    setActiveCategoryChip(targetCategory);
+    if (clearMenuSearch()) renderCatalogOnly();
+    const target =
+      targetCategory === 'all'
+        ? $('.menu-toolbar')
+        : document.getElementById('category-' + targetCategory);
+    if (target) {
+      target.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+    announce(
+      t('a11y.categoryJump', {
+        name:
+          targetCategory === 'all'
+            ? t('order.allCategories')
+            : categoryLabel(categoryById(targetCategory))
+      })
+    );
   }
 
   function menuCatalogHTML() {
@@ -4175,12 +4214,8 @@
           refreshAddonEditorEmptyState();
           break;
         }
-        case 'filter-category':
-          ui.category = target.dataset.category || 'all';
-          $$('.filter-chip').forEach(function (chip) {
-            chip.setAttribute('aria-pressed', String(chip === target));
-          });
-          renderCatalogOnly();
+        case 'jump-category':
+          jumpToMenuCategory(target.dataset.category || 'all');
           break;
         case 'clear-search': {
           ui.search = '';
@@ -4547,6 +4582,10 @@
     }
     if (target.id === 'menu-search') {
       ui.search = target.value;
+      if (ui.category !== 'all') {
+        ui.category = 'all';
+        setActiveCategoryChip('all');
+      }
       const clearButton = $('.search-clear');
       if (clearButton) clearButton.hidden = !target.value;
       renderCatalogOnly();
