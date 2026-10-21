@@ -6,7 +6,7 @@
  */
 'use strict';
 
-const CACHE_VERSION = 'kasir-warung-v1.2.1';
+const CACHE_VERSION = 'kasir-warung-v1.2.2';
 const INDEX_URL = new URL('./index.html', self.location.href).href;
 
 const PRECACHE_URLS = [
